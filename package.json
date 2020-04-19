@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev-server": "nodemon --exec babel-node src/server/server.js --ignore dist/",
-    "dev-bundle": "webpack -w -d",
+    "start": "nodemon --exec babel-node server.js --ignore public/",
+    "dev": "webpack -w -d",
     "pro-bundle": "webpack -w -p"
   },
   "repository": {
