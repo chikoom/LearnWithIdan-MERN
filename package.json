@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/chikoom/LearnWithIdan-MERN#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "json-loader": "^0.5.7",
