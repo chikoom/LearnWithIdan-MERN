@@ -7,8 +7,8 @@ import express from 'express';
 const server = express();
 
 server.use(sassMiddleware({
-  src:path.join(__dirname, 'sass'),
-  dest:path.join(__dirname, 'public/style')
+  src: path.join(__dirname, 'sass'),
+  dest: path.join(__dirname, '/public'),
 }));
 
 server.set('view engine', 'ejs');
