@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 
 ReactDOM.render(
-  <App />,
+  <App initialBriefs={window.initialData.briefs} />,
   document.getElementById('root')
 );
+
