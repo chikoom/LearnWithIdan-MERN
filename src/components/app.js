@@ -9,7 +9,6 @@ const pushState = (obj, url) =>
 
 class App extends React.Component {
   state = { 
-    pageHeader: 'Learning With  Idan',
     briefs: this.props.initialBriefs
   }
   componentDidMount(){
@@ -25,7 +24,6 @@ class App extends React.Component {
     );
     api.fetchBrief(briefId).then( brief => {
       this.setState({
-        pageHeader: brief.lessonName,
         currentBriefId: brief.id,
         briefs: {
           ...this.state.briefs,
@@ -36,6 +34,13 @@ class App extends React.Component {
   };
   currentBrief() {
     return this.state.briefs[this.state.currentBriefId];
+  }
+  pageHeader() {
+    if(this.state.currentBriefId) {
+      return this.currentBrief().lessonName;
+    } else {
+      return 'Learning With Idan';
+    }
   }
   currentContent() { 
     if(this.state.currentBriefId) {
@@ -49,7 +54,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header message={this.state.pageHeader} />
+        <Header message={this.pageHeader()} />
         {this.currentContent()}
       </div>
     );
