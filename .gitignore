@@ -38,3 +38,4 @@ jspm_packages
 
 public/bundle.js
 public/style.css
+src/testData.json
