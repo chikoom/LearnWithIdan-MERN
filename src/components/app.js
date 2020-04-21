@@ -17,7 +17,7 @@ class App extends React.Component {
       <div className="App">
         <Header message={this.state.pageHeader} />
         <div>
-          {this.props.briefs.map(brief => <BriefPreview {...brief} />)}
+          {this.props.briefs.map(brief => <BriefPreview key={brief.id} {...brief} />)}
         </div>
       </div>
     );
