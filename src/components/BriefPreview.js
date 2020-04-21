@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
-const BriefPreview = (brief) => (
-  <div className="BriefPreview">
-    <h3 className="className">{brief.className}</h3>
-    <h4 className="briefName">{brief.briefName}</h4>
-  </div>
-);
+class BriefPreview extends Component {
+  componentClicked = () => {
+    this.props.onBriefClick(this.props.id);
+  };
+  render() {
+    return(
+      <div className="link BriefPreview" onClick={this.componentClicked}>
+        <h3 className="lessonName">
+          {this.props.lessonName}   
+        </h3>
+        <h4 className="briefName">
+          {this.props.briefName}
+        </h4>
+      </div>
+    );
+  }
+}
+
+BriefPreview.propTypes = {
+  id: propTypes.number.isRequired,
+  lessonName: propTypes.string.isRequired,
+  briefName: propTypes.string.isRequired,
+  onBriefClick: propTypes.func.isRequired
+};
 
 export default BriefPreview;
