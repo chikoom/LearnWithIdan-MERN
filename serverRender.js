@@ -16,9 +16,9 @@ const getApiUrl = briefId => {
 const getIinitialData = (briefId, apiData) => {
   if(briefId){
     return {
-      currentBriefId: apiData.id,
+      currentBriefId: apiData._id,
       briefs : {
-        [apiData.id]: apiData
+        [apiData._id]: apiData
       }
     };
   }

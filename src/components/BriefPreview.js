@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 class BriefPreview extends Component {
   componentClicked = () => {
-    this.props.onBriefClick(this.props.id);
+    this.props.onBriefClick(this.props._id);
   };
   render() {
     return(
@@ -20,7 +20,7 @@ class BriefPreview extends Component {
 }
 
 BriefPreview.propTypes = {
-  id: propTypes.number.isRequired,
+  _id: propTypes.string.isRequired,
   lessonName: propTypes.string.isRequired,
   briefName: propTypes.string.isRequired,
   onBriefClick: propTypes.func.isRequired

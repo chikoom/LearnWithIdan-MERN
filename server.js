@@ -23,7 +23,10 @@ server.get(['/', '/brief/:briefId'], (req,res) => {
         initialData
       });
     })
-    .catch(console.error);
+    .catch(error => {
+      console.error(error);
+      res.status(404).send('Didn\'t found what you where looking for...');
+    });
 });
 
 server.use('/api', apiRouter);

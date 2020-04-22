@@ -1,5 +1,5 @@
 import express from 'express';
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectID } from 'mongodb';
 import { strict as assert } from 'assert';
 import config from '../config';
 
@@ -17,7 +17,6 @@ router.get('/briefs', (req, res) => {
   let briefs = {};
   mdb.collection('briefs').find({})
     .project({
-      id:1,
       lessonName:1,
       briefName:1
     })
@@ -27,30 +26,32 @@ router.get('/briefs', (req, res) => {
         res.send({briefs});
         return;
       }
-      briefs[brief.id] = brief;
+      briefs[brief._id] = brief;
     });
 });
 
 router.get('/briefs/:briefId', (req, res) => {
-  mdb.collection('briefs').findOne({ id: Number(req.params.briefId) })
+  mdb.collection('briefs').findOne({ _id: ObjectID(req.params.briefId) })
     .then(brief => res.send(brief))
     .catch(console.error);
 });
 
 
 router.get('/answers/:answerIds', (req, res) => {
-  const nameIds = req.params.answerIds.split(',').map(Number);
+  const nameIds = req.params.answerIds.split(',').map(ObjectID);
   let answers = {};
-  mdb.collection('answers').find({ id: {$in: nameIds} })
+  mdb.collection('answers').find({ _id: {$in: nameIds} })
     .each((err, answer) => {
       assert.equal(null, err);
       if(!answer){
         res.send({answers});
         return;
       }
-      answers[answer.id] = answer;
+      answers[answer._id] = answer;
     });
 });
+
+
 
 
 

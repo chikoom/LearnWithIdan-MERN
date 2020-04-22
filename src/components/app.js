@@ -50,10 +50,10 @@ class App extends React.Component {
     );
     api.fetchBrief(briefId).then( brief => {
       this.setState({
-        currentBriefId: brief.id,
+        currentBriefId: brief._id,
         briefs: {
           ...this.state.briefs,
-          [brief.id]:brief
+          [brief._id]:brief
         }
       });
     });  
