@@ -53,6 +53,27 @@ router.get('/answers/:answerIds', (req, res) => {
 
 
 
+router.post('/answers', (req,res) => {
+  const answer = req.body.newAnswer;
+  const briefId = ObjectID(req.body.briefId);
+  // Validation ...
+  mdb.collection('answers').insertOne({ answer }).then( result => 
+    mdb.collection('briefs').findOneAndUpdate(
+      { _id: briefId },
+      { $push: { answerIds: result.insertedId } },
+      { returnOriginal: false }
+    ).then( doc => 
+      res.send({
+        updatedBrief: doc.value,
+        newAnswer: { _id: result.insertedId, answer}
+      })
+    )
+  )
+    .catch(error => {
+      console.error(error);
+      res.status(404).send('Couldn\'t update the answer...');
+    });
+});
 
 
 export default router;

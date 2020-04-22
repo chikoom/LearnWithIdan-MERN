@@ -5,6 +5,9 @@ class Brief extends Component {
   componentDidMount(){
     this.props.fetchAnswers(this.props.answerIds);
   }
+  onAnswerSubmit = (event) => {
+    event.preventDefault();
+  };
   render() {
     return(
       <div className="Brief">
@@ -39,7 +42,7 @@ class Brief extends Component {
             <h3 className="panel-title">Propose a New Name</h3>
           </div>
           <div className="panel-body">
-            <form>
+            <form onSubmit={this.onAnswerSubmit}>
               <div className="input-group">
                 <input type="text" placeholder="New Name Here..." className="form-control" />
                 <span className="input-group-btn">
