@@ -37,5 +37,22 @@ router.get('/briefs/:briefId', (req, res) => {
     .catch(console.error);
 });
 
+
+router.get('/answers/:answerIds', (req, res) => {
+  const nameIds = req.params.answerIds.split(',').map(Number);
+  let answers = {};
+  mdb.collection('answers').find({ id: {$in: nameIds} })
+    .each((err, answer) => {
+      assert.equal(null, err);
+      if(!answer){
+        res.send({answers});
+        return;
+      }
+      answers[answer.id] = answer;
+    });
+});
+
+
+
 export default router;
 

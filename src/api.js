@@ -12,3 +12,10 @@ export const fetchBriefList = () => {
     .then( resp => resp.data.briefs)
     .catch(console.error);
 };
+
+
+export const fetchAnswers = answerIds => {
+  return axios.get(`/api/answers/${answerIds.join(',')}`)
+    .then( resp => resp.data.answers)
+    .catch(console.error);
+};

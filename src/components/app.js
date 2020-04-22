@@ -27,6 +27,22 @@ class App extends React.Component {
   componentWillUnmount(){
     onPopState(null);
   }
+  fetchAnswers = (answerIds) => {
+    if(answerIds.length == 0){
+      return;
+    }
+    api.fetchAnswers(answerIds).then(answers => {
+      this.setState({
+        answers
+      });
+    });
+  }
+  lookupAnswer = (answerId) => {
+    if(!this.state.answers || !this.state.answers[answerId]){
+      return { answer:'Loading...' };
+    }
+    return this.state.answers[answerId];
+  }
   fetchBrief = (briefId) => {
     pushState(
       {currentBriefId: briefId},
@@ -67,7 +83,9 @@ class App extends React.Component {
   currentContent() { 
     if(this.state.currentBriefId) {
       return <Brief 
-        gotoBriefListClick={this.fetchBriefList}
+        gotoBriefListClick= {this.fetchBriefList}
+        fetchAnswers= {this.fetchAnswers}
+        lookupAnswer= {this.lookupAnswer}
         {...this.currentBrief()} />;
     } else {
       return <BriefList 
