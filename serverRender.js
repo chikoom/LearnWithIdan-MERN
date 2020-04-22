@@ -6,14 +6,36 @@ import App from './src/components/App';
 import config from './config';
 import axios from 'axios';
 
-const serverRender = () =>
-  axios.get(`${config.serverUrl}/api/briefs`)
+const getApiUrl = briefId => {
+  if(briefId) {
+    return `${config.serverUrl}/api/briefs/${briefId}`;
+  } 
+  return `${config.serverUrl}/api/briefs`;
+};
+
+const getIinitialData = (briefId, apiData) => {
+  if(briefId){
+    return {
+      currentBriefId: apiData.id,
+      briefs : {
+        [apiData.id]: apiData
+      }
+    };
+  }
+  return {
+    briefs: apiData.briefs
+  };
+};
+
+const serverRender = (briefId) =>
+  axios.get(getApiUrl(briefId))
     .then(resp => {
+      const initialData = getIinitialData(briefId, resp.data);
       return {
         initialMarkup: ReactDOMServer.renderToString(
-          <App initialBriefs={resp.data.briefs} />
+          <App initialData={initialData} />
         ),
-        initialData: resp.data
+        initialData
       };    
     });
 

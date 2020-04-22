@@ -15,8 +15,8 @@ server.set('view engine', 'ejs');
 
 import serverRender from './serverRender';
 
-server.get('/', (req,res) => {
-  serverRender()
+server.get(['/', '/brief/:briefId'], (req,res) => {
+  serverRender(req.params.briefId)
     .then(({initialMarkup, initialData}) => {
       res.render('index', {
         initialMarkup,
