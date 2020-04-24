@@ -13,6 +13,7 @@ const getApiUrl = briefId => {
   return `${config.serverUrl}/api/briefs`;
 };
 
+
 const getIinitialData = (briefId, apiData) => {
   if(briefId){
     return {
@@ -27,6 +28,7 @@ const getIinitialData = (briefId, apiData) => {
   };
 };
 
+// 
 const serverRender = (briefId) =>
   axios.get(getApiUrl(briefId))
     .then(resp => {

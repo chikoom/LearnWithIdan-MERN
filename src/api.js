@@ -19,3 +19,9 @@ export const fetchAnswers = answerIds => {
     .then( resp => resp.data.answers)
     .catch(console.error);
 };
+
+export const addAnswer = (newAnswer, briefId) => {
+  return axios.post('/api/answers/', { newAnswer,briefId })
+    .then( resp => resp.data)
+    .catch(console.error);
+};

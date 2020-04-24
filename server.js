@@ -1,11 +1,16 @@
 import config from './config';
+import serverRender from './serverRender';
 import apiRouter from './api';
+
 import sassMiddleware from 'node-sass-middleware';
 import path from 'path';
-
+import favicon from 'serve-favicon';
 import express from 'express';
 import bodyParser from 'body-parser';
+
 const server = express();
+
+server.use(favicon(path.join(__dirname, '/public', 'favicon.ico')));
 server.use(bodyParser.json());
 
 
@@ -15,8 +20,6 @@ server.use(sassMiddleware({
 }));
 
 server.set('view engine', 'ejs');
-
-import serverRender from './serverRender';
 
 server.get(['/', '/brief/:briefId'], (req,res) => {
   serverRender(req.params.briefId)

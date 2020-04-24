@@ -1,18 +1,45 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:900,600,400&display=swap");
+body {
+  background: #020024;
+  background: linear-gradient(0deg, #020024 0%, #090979 42%, black 100%); }
+
+.App {
+  background-color: #292929;
+  color: #eee;
+  font-family: 'Montserrat', sans-serif; }
+  .App .header-container {
+    margin-top: 2em;
+    padding: 1em;
+    background-color: #000; }
+    .App .header-container .header {
+      font-weight: 900; }
+    .App .header-container hr {
+      border-color: #eee; }
+    .App .header-container .sub-header {
+      font-weight: 400; }
+  .App .BriefsList {
+    padding: 1em; }
+
 .BriefPreview {
   margin: 1em;
   border: 1px solid #ccc; }
   .BriefPreview .lessonName {
     border-bottom: 1px solid #ccc;
     padding: 0.25em 0.5em;
-    font-weight: bold;
+    font-weight: 600;
     background-color: #054081;
     color: #cbf0fe; }
   .BriefPreview .briefName {
     padding: 0.5em; }
 
+.Brief .panel {
+  padding: 2em; }
+
+.Brief .submittedAnswer {
+  color: #000; }
+
 .link {
   cursor: pointer; }
 
 .goto-brief-list-link {
-  margin: 1em 0em;
-  color: 0080ff; }
+  margin: 1em 0em; }

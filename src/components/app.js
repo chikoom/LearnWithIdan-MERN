@@ -77,7 +77,7 @@ class App extends React.Component {
     if(this.state.currentBriefId) {
       return this.currentBrief().lessonName;
     } else {
-      return 'Learning With Idan';
+      return 'Assignment List:';
     }
   }
   currentContent() { 
@@ -86,12 +86,28 @@ class App extends React.Component {
         gotoBriefListClick= {this.fetchBriefList}
         fetchAnswers= {this.fetchAnswers}
         lookupAnswer= {this.lookupAnswer}
+        addAnswer= {this.addAnswer}
         {...this.currentBrief()} />;
     } else {
       return <BriefList 
         onBriefClick={this.fetchBrief}
         briefs={this.state.briefs} />;
     }
+  }
+  addAnswer = (newAnswer, briefId) => {
+    api.addAnswer(newAnswer, briefId).then(resp =>
+      this.setState({
+        briefs: {
+          ...this.state.briefs,
+          [resp.updatedBrief._id]:resp.updatedBrief
+        },
+        answers: {
+          ...this.state.answers,
+          [resp.newAnswer._id]:resp.newAnswer
+        }
+      })
+    )
+      .catch(console.error);
   }
   render() {
     return (
