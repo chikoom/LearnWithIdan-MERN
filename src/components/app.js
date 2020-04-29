@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+
 import Header from './Header';
 import BriefList from './BriefList';
 import Brief from './Brief';
@@ -26,6 +27,13 @@ class App extends React.Component {
   }
   componentWillUnmount(){
     onPopState(null);
+  }
+  setPageHeader() {
+    if(this.state.currentBriefId) {
+      return this.currentBrief().lessonName;
+    } else {
+      return;
+    }
   }
   fetchAnswers = (answerIds) => {
     if(answerIds.length == 0){
@@ -73,13 +81,6 @@ class App extends React.Component {
   currentBrief() {
     return this.state.briefs[this.state.currentBriefId];
   }
-  pageHeader() {
-    if(this.state.currentBriefId) {
-      return this.currentBrief().lessonName;
-    } else {
-      return 'Assignment List:';
-    }
-  }
   currentContent() { 
     if(this.state.currentBriefId) {
       return <Brief 
@@ -112,7 +113,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header message={this.pageHeader()} />
+        <Header message={this.setPageHeader()} onTitleClicked={this.fetchBriefList} />
         {this.currentContent()}
       </div>
     );

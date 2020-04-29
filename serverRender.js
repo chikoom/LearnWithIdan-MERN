@@ -28,7 +28,6 @@ const getIinitialData = (briefId, apiData) => {
   };
 };
 
-// 
 const serverRender = (briefId) =>
   axios.get(getApiUrl(briefId))
     .then(resp => {
